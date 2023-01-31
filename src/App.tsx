@@ -7,6 +7,7 @@ import { Route, Router, Routes } from 'react-router-dom';
 import { HomePage } from "./components/HomePage"
 import { CarForm } from "./components/CarForm"
 import { ChatPage } from "./components/ChatPage"
+import { db } from "./firebase"
 
 
 function App() {
