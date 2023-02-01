@@ -1,24 +1,56 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, SyntheticEvent } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import { db } from '../firebase';
-import {collection, getDocs, onSnapshot, addDoc, updateDoc, doc, deleteDoc} from "firebase/firestore";
-import { Button } from "react-bootstrap";
+import {collection, getDocs, onSnapshot, addDoc, updateDoc, doc, deleteDoc, setDoc} from "firebase/firestore";
+import Button from "react-bootstrap/Button";
 
 export function CarForm() {
 
-  const [newMake, setNewMake] = useState('');
-  const [newModel, setNewModel] = useState('');
+  // const [newMake, setNewMake] = useState('');
+  // const [newModel, setNewModel] = useState('');
   const [users, setUsers] = useState<any[]>([]);
   const usersRef = collection(db, "users");
 
-  const createUser = async () => {
-    // await addDoc(usersRef, { make: newMake, model: newModel });
-    console.log("whats up yal")
-    // setNewMake("")
-    // setNewModel("")
-  };
+  const [formData, setFormData] = useState({
+    name: " ",
+    email: " ",
+    year: 0,
+    make: " ",
+    model: " ",
+    issue: " ",
+    media: " ",
+    extra: " "
+  })
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData( prevState => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value
+      }
+    })
+  }
+  console.log(formData)
+
+
+  const createUser = async (e: SyntheticEvent) => {
+    e.preventDefault()
+    await addDoc(usersRef, formData);
+
+    alert("Form Successfully Submitted")
+    // console.log("form submittedddd")
+    setFormData({
+    name: " ",
+    email: " ",
+    year: 0,
+    make: " ",
+    model: " ",
+    issue: " ",
+    media: " ",
+    extra: " "
+  })
+}
   // useEffect(()=>
   // onSnapshot(collection(db, "users"), (snapshot) =>
   // setUsers(snapshot.docs.map((doc)=>({...doc.data()})))
@@ -35,30 +67,34 @@ export function CarForm() {
 
 
   return (
-    <div>
-    <Form>
+    <Form onSubmit={createUser}>
       <Form.Group className="mb-3">
         <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter name" />
+        <Form.Control type="text" placeholder="Enter name" name="name" value={formData.name} onChange={handleChange} />
       </Form.Group>
+
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Control type="email" placeholder="Enter email" name="email" value={formData.email} onChange={handleChange} />
       </Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Label>Year</Form.Label>
-        <Form.Control type="number" placeholder="Enter the four digit year" />
+        <Form.Control type="number" placeholder="Enter the four digit year" name="year" value={formData.year} onChange={handleChange}/>
       </Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Label>Make</Form.Label>
-        <Form.Control type="text" placeholder="Car Make" onChange={(event) => {setNewMake(event.target.value)}}/>
+        <Form.Control type="text" placeholder="Car Make..."  name="make" value={formData.make} onChange={handleChange}/>
+        
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Model</Form.Label>
-        <Form.Control type="text" placeholder="Car Model" onChange={(event) => {setNewModel(event.target.value)}} />
+        <Form.Control type="text" placeholder="Car Model..." name="model" value={formData.model} onChange={handleChange} />
       </Form.Group>
+
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle className="mb-3" variant="success" id="dropdown-basic">
           General Issue:
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -67,28 +103,21 @@ export function CarForm() {
           <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <Form.Group className="mb-3" controlId="formFile">
+
+      <Form.Group className="mb-3" controlId="formFileMultiple">
         <Form.Label>Upload Photos/Videos/Audio</Form.Label>
-        <Form.Control type="file" placeholder=".jpg, .png...." />
+        <Form.Control type="file" placeholder=".jpg, .png...." name="media" onChange={handleChange}/>
       </Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Label>
           Anything additional you would like to share with the specialist?
         </Form.Label>
-        <Form.Control as="textarea" rows={3} />
+        <Form.Control as="textarea" rows={3} type="text" name="extra" value={formData.extra} onChange={handleChange}/>
       </Form.Group>
-      <Button type="submit" value="Submit Form" onSubmit={createUser}> Submit Form</Button>
+      
+      <Button value="Submit Form" type="submit"> Submit Form</Button>
     </Form>
-    
-    {users.map((user) => {
-      return (
-        alert("Form Successfully Submitted")
-      )
-    })}
-    </div>
-
-    
-
   );
      
 }
