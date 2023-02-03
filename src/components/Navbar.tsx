@@ -1,11 +1,15 @@
 import React from "react";
 import { Button, Container, Nav, Navbar as NavbarBS } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import logo from "../uthlogo.png"
 export function Navbar() {
   return (
-    <NavbarBS sticky="top" className="bg-white shadow-sm mb-5">
-      <Container>
-        <Nav className="me-auto">
+    <NavbarBS sticky="top" className="mb-5">
+      <Container className="me-auto">
+        <img src={logo} alt="logo"/>
+        </Container>
+      <Container className="fs-4" >
+        <Nav className="ms-auto">
           <Nav.Link to="/" as={NavLink}>
             {" "}
             Home{" "}
@@ -18,26 +22,13 @@ export function Navbar() {
             {" "}
             Map{" "}
           </Nav.Link>
+          <Button
+            style={{ width: "4rem", height: "3rem", position: "relative" }}
+            className="square bg-success rounded-pill"
+          > Login </Button>
         </Nav>
-        <Button
-          style={{ width: "3rem", height: "3rem", position: "relative" }}
-          variant="outline-primary"
-          className="rounded-circle"
-        >
-          {/* <div
-            className="rounded-circle bg-danger d-flex justify-content-center
-            align-items-center"
-            style={{
-              color: "white",
-              width: "1.5rem",
-              height: "1.5rem",
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              transform: "translate(25%, 25%)",
-            }}
-          ></div> */}
-        </Button>
+       
+        
       </Container>
     </NavbarBS>
   );

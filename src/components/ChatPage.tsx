@@ -22,93 +22,93 @@ import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
 export function ChatPage () {
 
-    interface Message {
-        text: string,
-        displayName: string,
-        uid: string,
-        photoURL: string,
-        id: string
-    }
+    // interface Message {
+    //     text: string,
+    //     displayName: string,
+    //     uid: string,
+    //     photoURL: string,
+    //     id: string
+    // }
     
-    type ChatMessageProps = {
-        message: Message,
-        key: string
-    }
-    const [user] = useAuthState(auth)
+    // type ChatMessageProps = {
+    //     message: Message,
+    //     key: string
+    // }
+    // const [user] = useAuthState(auth)
 
-    const messageRef = collection(db, "messages")
-    const queryRef = query(messageRef, orderBy("createdAt", 'desc'), limit(20))
-    // const [messages] = useCollectionData(collection(db,"id"))
-    // ERROR ONE
-    const [messages]:[Message[] | undefined, boolean, Error | undefined]  = useCollection(queryRef, {idField: "id"})
-    // const [messages] : [Message[] | undefined, boolean, Error | undefined] = useCollectionData<Message>(queryRef, {idField: 'id'})
+    // const messageRef = collection(db, "messages")
+    // const queryRef = query(messageRef, orderBy("createdAt", 'desc'), limit(20))
+    // // const [messages] = useCollectionData(collection(db,"id"))
+    // // ERROR ONE
+    // const [messages]:[Message[] | undefined, boolean, Error | undefined]  = useCollection(queryRef, {idField: "id"})
+    // // const [messages] : [Message[] | undefined, boolean, Error | undefined] = useCollectionData<Message>(queryRef, {idField: 'id'})
   
-    const [formValue, setFormValue] = useState('')
+    // const [formValue, setFormValue] = useState('')
   
-    const scrollTo = useRef(null)
+    // const scrollTo = useRef(null)
   
-    const sendMessage = async(e: React.FormEvent) => {
-      e.preventDefault()
+    // const sendMessage = async(e: React.FormEvent) => {
+    //   e.preventDefault()
   
-      if (!user || !formValue) return
+    //   if (!user || !formValue) return
       
-      const payload = {
-        text: formValue, 
-        displayName: user.displayName,
-        createdAt: serverTimestamp(), 
-        uid: user.uid,
-        photoURL: user.photoURL}
+    //   const payload = {
+    //     text: formValue, 
+    //     displayName: user.displayName,
+    //     createdAt: serverTimestamp(), 
+    //     uid: user.uid,
+    //     photoURL: user.photoURL}
   
-        await addDoc(messageRef, payload)
-        console.log(auth)
+    //     await addDoc(messageRef, payload)
+    //     console.log(auth)
   
-        setFormValue("")
+    //     setFormValue("")
   
-    }
+    // }
   
-    // useEffect(() => {
-    //   scrollTo.current.scrollIntoView({behavior: "smooth"})
-    // }, [messages])
+    // // useEffect(() => {
+    // //   scrollTo.current.scrollIntoView({behavior: "smooth"})
+    // // }, [messages])
   
-    const googleSignIn = () => {
-      const provider = new GoogleAuthProvider();
-      return signInWithPopup(auth, provider);
-    }
+    // const googleSignIn = () => {
+    //   const provider = new GoogleAuthProvider();
+    //   return signInWithPopup(auth, provider);
+    // }
   
-    const logOut = () => {
-      signOut(auth)
-    }
+    // const logOut = () => {
+    //   signOut(auth)
+    // }
 
     
     
-    function ChatMessage(props: ChatMessageProps){
-      if (!auth.currentUser) return
-      const {text, displayName, uid, photoURL} = props.message
-      const className = auth.currentUser != null && uid === auth.currentUser.uid ? 'sent' : 'received'
+    // function ChatMessage(props: ChatMessageProps){
+    //   if (!auth.currentUser) return
+    //   const {text, displayName, uid, photoURL} = props.message
+    //   const className = auth.currentUser != null && uid === auth.currentUser.uid ? 'sent' : 'received'
   
-    //   const className = uid === auth.currentUser.uid ? "sent" : "received"
-      return (
-        <div className={className}> 
+    // //   const className = uid === auth.currentUser.uid ? "sent" : "received"
+    //   return (
+    //     <div className={className}> 
           
-            <h1 className='name'>{displayName}</h1>
-            <p>{text}</p>
+    //         <h1 className='name'>{displayName}</h1>
+    //         <p>{text}</p>
          
-          <img src={photoURL} alt=""/>
+    //       <img src={photoURL} alt=""/>
   
-        </div>
+    //     </div>
   
-      )
+    //   )
   
-    }
+    // }
   
     return (
       <div className="App">
-        <div className = "header"></div>
+        {/* <div className = "header"></div>
         <h1>Messages</h1>
         <div className= "messages"> 
-          <div ref={scrollTo}></div>
+          <div ref={scrollTo}></div> */}
           {/* ERROR 2 */}
-          {messages && messages.map(msg => <ChatMessage key={msg.id}
+          {/* {messages && messages.map(msg => <ChatMessage key={msg.id}
           message={msg.data()}/>)}
           </div>
   
@@ -123,7 +123,7 @@ export function ChatPage () {
         <div className = 'buttons'>
           {!user ? <button className="login" onClick={() => googleSignIn()}>Login With Google</button> : 
           <button className="login" onClick={() => logOut()}>Log out</button>}
-        </div>
+        </div> */}
         
       </div>
     );

@@ -6,6 +6,8 @@ import {collection, getDocs, onSnapshot, addDoc, updateDoc, doc, deleteDoc, setD
 import Button from "react-bootstrap/Button";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
+import RangeSlider from "react-bootstrap-range-slider";
 
 export function CarForm() {
 
@@ -14,7 +16,7 @@ export function CarForm() {
   const [formData, setFormData] = useState({
     name: " ",
     email: " ",
-    year: 0,
+    year: 2023,
     make: " ",
     model: " ",
     issue: " ",
@@ -42,7 +44,7 @@ export function CarForm() {
     setFormData({
     name: " ",
     email: " ",
-    year: 0,
+    year: 2023,
     make: " ",
     model: " ",
     issue: " ",
@@ -51,20 +53,32 @@ export function CarForm() {
   })
 }
 
+const form = document.querySelector('form')
+form?.addEventListener('submit', e => {
+  if(!form?.checkValidity()) {
+    // e.preventDefault()
+  }
+  form.classList.add('was-validated')
+})
+
   return (
+    <div className='container'>
     <Form onSubmit={createUser}>
       <Form.Group className="mb-3">
         <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter name" name="name" value={formData.name} onChange={handleChange} />
+        <Form.Control type="text" placeholder="Enter name" name="name" value={formData.name} onChange={handleChange}/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" name="email" value={formData.email} onChange={handleChange} />
+        <div className="invalid-feedback">Invalid email</div>
+        <div className="valid-feedback">correct</div>
       </Form.Group>
 
       <Form.Group className="mb-3">
         <Form.Label>Year</Form.Label>
+        {/* <RangeSlider value={formData.year} onChange={handleChange}/> */}
         <Form.Control type="number" placeholder="Enter the four digit year" name="year" value={formData.year} onChange={handleChange}/>
       </Form.Group>
 
@@ -77,12 +91,19 @@ export function CarForm() {
         <Form.Label>Model</Form.Label>
         <Form.Control type="text" placeholder="Car Model..." name="model" value={formData.model} onChange={handleChange} />
       </Form.Group>
+    <Dropdown>
+      <select className="form-select">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
+    </Dropdown>
 
       <Dropdown>
-        <Dropdown.Toggle className="mb-3" variant="success" id="dropdown-basic">
+        <Dropdown.Toggle className="mb-3 form-select" variant="success" >
           General Issue:
         </Dropdown.Toggle>
-        <Dropdown.Menu>
+        <Dropdown.Menu className="form-select">
           <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
           <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
           <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
@@ -105,5 +126,6 @@ export function CarForm() {
       <Button value="Submit Form" type="submit"> Submit Form</Button>
       {/* </Nav.Link> */}
     </Form>
+    </div>
   );
 };
