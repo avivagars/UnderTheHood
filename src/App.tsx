@@ -7,6 +7,7 @@ import { Route, Router, Routes } from 'react-router-dom';
 import { HomePage } from "./components/HomePage"
 import { CarForm } from "./components/CarForm"
 import { ChatPage } from "./components/ChatPage"
+import { Map } from "./components/Map"
 import { db } from "./firebase"
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' element={<HomePage/>} />
           <Route path='/form' element={<CarForm/>} />
           <Route path='/chat' element={<ChatPage/>} />
+          <Route path='/map' element={<Map/>}/>
         </Routes>
       </Container>
     </div>

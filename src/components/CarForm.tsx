@@ -4,12 +4,11 @@ import Form from "react-bootstrap/Form";
 import { db } from '../firebase';
 import {collection, getDocs, onSnapshot, addDoc, updateDoc, doc, deleteDoc, setDoc} from "firebase/firestore";
 import Button from "react-bootstrap/Button";
+import { Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 export function CarForm() {
 
-  // const [newMake, setNewMake] = useState('');
-  // const [newModel, setNewModel] = useState('');
-  const [users, setUsers] = useState<any[]>([]);
   const usersRef = collection(db, "users");
 
   const [formData, setFormData] = useState({
@@ -51,20 +50,6 @@ export function CarForm() {
     extra: " "
   })
 }
-  // useEffect(()=>
-  // onSnapshot(collection(db, "users"), (snapshot) =>
-  // setUsers(snapshot.docs.map((doc)=>({...doc.data()})))
-  // ), []);
-
-  // useEffect(() => {
-  //   const getUsers = async () => {
-  //     const data = await getDocs(usersRef);
-  //     setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  //   };
-
-  //   getUsers();
-  // }, []);
-
 
   return (
     <Form onSubmit={createUser}>
@@ -116,8 +101,9 @@ export function CarForm() {
         <Form.Control as="textarea" rows={3} type="text" name="extra" value={formData.extra} onChange={handleChange}/>
       </Form.Group>
       
+      {/* <Nav.Link to="/chat" as={NavLink}>  */}
       <Button value="Submit Form" type="submit"> Submit Form</Button>
+      {/* </Nav.Link> */}
     </Form>
   );
-     
-}
+};

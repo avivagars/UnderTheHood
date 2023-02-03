@@ -3,20 +3,20 @@ import { Button, Container, Nav, Navbar as NavbarBS } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 export function Navbar() {
   return (
-    <NavbarBS sticky="top" className="bg-white shadow-sm mb-3">
+    <NavbarBS sticky="top" className="bg-white shadow-sm mb-5">
       <Container>
         <Nav className="me-auto">
           <Nav.Link to="/" as={NavLink}>
             {" "}
             Home{" "}
           </Nav.Link>
-          <Nav.Link to="/form" as={NavLink}>
-            {" "}
-            Form{" "}
-          </Nav.Link>
           <Nav.Link to="/chat" as={NavLink}>
             {" "}
             Chat{" "}
+          </Nav.Link>
+          <Nav.Link to="/map" as={NavLink}>
+            {" "}
+            Map{" "}
           </Nav.Link>
         </Nav>
         <Button
@@ -24,7 +24,7 @@ export function Navbar() {
           variant="outline-primary"
           className="rounded-circle"
         >
-          <div
+          {/* <div
             className="rounded-circle bg-danger d-flex justify-content-center
             align-items-center"
             style={{
@@ -36,7 +36,7 @@ export function Navbar() {
               right: 0,
               transform: "translate(25%, 25%)",
             }}
-          ></div>
+          ></div> */}
         </Button>
       </Container>
     </NavbarBS>
