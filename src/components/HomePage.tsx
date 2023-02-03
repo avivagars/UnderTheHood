@@ -2,11 +2,9 @@ import { Button, Col, Container, Nav, Navbar as NavbarBS, Row } from "react-boot
 import { NavLink } from "react-router-dom";
 import carImg from "../car.jpg"
 import "./HomePage.css"
-import { MDBContainer, MDBFooter } from 'mdb-react-ui-kit';
 
 export function HomePage () {
     return (
-        <body> 
         <Container >
            
         <Container fluid className="gy-5 g-2">
@@ -52,18 +50,5 @@ export function HomePage () {
             </Container> 
             
             </Container>
-            <footer>
-            <MDBFooter className='text-center text-white' style={{ backgroundColor: '#21081a' }}>
-        <MDBContainer className='p-4'></MDBContainer>
-  
-        <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-          © 2020 Copyright:
-          <a className='text-white' href='https://mdbootstrap.com/'>
-            MDBootstrap.com
-          </a>
-        </div>
-      </MDBFooter>
-            </footer>
-            </body>
     )
 }
