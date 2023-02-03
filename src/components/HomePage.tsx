@@ -1,11 +1,17 @@
 import { Button, Col, Container, Nav, Navbar as NavbarBS, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import carImg from "../car.jpg"
+import "./HomePage.css"
+import { MDBContainer, MDBFooter } from 'mdb-react-ui-kit';
+
 export function HomePage () {
     return (
-        <Container className="g-5"> 
+        <body> 
+        <Container >
+           
         <Container fluid className="gy-5 g-2">
             <Row className='row-cols gy-5'>
-                <Col className="h-100 d-flex align-items-center justify-content-center display-1">
+                <Col style= {{width: 100}} className="h-100 d-flex align-items-center justify-content-center display-1">
                 Get Word From A Specialist
                 </Col>
             </Row>
@@ -14,6 +20,7 @@ export function HomePage () {
                 What type of help are you looking for?
                 </Col>
             </Row>
+            
         </Container>
             <Container className="gy-2">
                 <Row className="text-center align-middle btn-group container row">
@@ -43,6 +50,20 @@ export function HomePage () {
                     </Col>
                 </Row>
             </Container> 
+            
             </Container>
+            <footer>
+            <MDBFooter className='text-center text-white' style={{ backgroundColor: '#21081a' }}>
+        <MDBContainer className='p-4'></MDBContainer>
+  
+        <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+          © 2020 Copyright:
+          <a className='text-white' href='https://mdbootstrap.com/'>
+            MDBootstrap.com
+          </a>
+        </div>
+      </MDBFooter>
+            </footer>
+            </body>
     )
 }

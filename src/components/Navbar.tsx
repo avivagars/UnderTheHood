@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 import logo from "../uthlogo.png"
 export function Navbar() {
   return (
-    <NavbarBS sticky="top" className="mb-5">
+    <NavbarBS sticky="top" className="mb-5 bg-white shadow-sm">
       <Container className="me-auto">
-        <img src={logo} alt="logo"/>
+        <img src={logo} alt="logo" width="200" />
         </Container>
       <Container className="fs-4" >
         <Nav className="ms-auto">
