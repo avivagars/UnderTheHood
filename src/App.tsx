@@ -9,7 +9,7 @@ import { CarForm } from "./components/CarForm"
 import { ChatPage } from "./components/ChatPage"
 import { Map } from "./components/Map"
 import { db } from "./firebase"
-import { Footer } from "./components/Footer"
+// import { Footer } from "./components/Footer"
 
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
           <Route path='/map' element={<Map/>}/>
         </Routes>
       </Container>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

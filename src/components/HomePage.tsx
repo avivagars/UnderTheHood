@@ -1,11 +1,27 @@
 import { Button, Col, Container, Nav, Navbar as NavbarBS, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import carImg from "../car.jpg"
-import "./HomePage.css"
+import carImg from "../car.jpg";
+import car from "../car1.jpg"
+import "./HomePage.css";
+import { Footer } from "../components/Footer"
 
 export function HomePage () {
     return (
-        <Container >
+        <Container fluid
+        style={{
+          backgroundImage: `url(${carImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          height: "100vh",
+          width: "100vw",
+          margin: 0,
+          padding: 0,
+          objectFit: "cover"
+          
+          
+        }}
+      >
            
         <Container fluid className="gy-5 g-2">
             <Row className='row-cols gy-5'>
@@ -48,6 +64,7 @@ export function HomePage () {
                     </Col>
                 </Row>
             </Container> 
+            <Footer/>
             
             </Container>
     )
