@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import firebase from "firebase/app";
+import './ChatPage.css'
 import {
   addDoc,
   collection,
@@ -25,6 +26,8 @@ import {
 import { Auth } from "./Auth";
 import { ChatForm } from "./ChatForm";
 import { DocumentData } from "@firebase/firestore-types";
+import person from "../person_circle.png"
+import { Container } from "react-bootstrap";
 
 function ChatPage() {
   interface Message {
@@ -107,7 +110,7 @@ function ChatPage() {
         ? "sent"
         : "received";
 
-    //   const className = uid === auth.currentUser.uid ? "sent" : "received"
+      // const className = uid === auth.currentUser.uid ? "sent" : "received"
     return (
       <div className={className}>
         <h1 className="name">{displayName}</h1>
@@ -119,20 +122,25 @@ function ChatPage() {
   }
 
   return (
-    <div className="App">
-      hello
-      <ChatForm />
+    <>
+     <h6 className="fs-1">
+      <ChatForm/>
+      </h6>
+    <div className="Chat">
+     
+      
       <div className="header"></div>
-      <h1>Messages</h1>
+      <img className="img-fluid mx-auto d-block" style={{width: 150, height: 180 }} src={person} alt="person-icon" />;
+      <h1 className="fs-3">Messages</h1>
+      
       <div className="messages">
         <div ref={scrollTo}></div>
-
         {messages &&
           messages.docs.map((msg) => (
             <ChatMessage key={msg.id} message={msg.data() as Message} />
           ))}
       </div>
-      <form>
+      <form className="sendMessage">
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
@@ -151,6 +159,7 @@ function ChatPage() {
         )}
       </div>
     </div>
+    </>
   );
 }
 export default ChatPage;

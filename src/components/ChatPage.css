@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+/* .{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+  
+  .Chat{
+    width: 100vw;
+    height: 100vh;
+    background-color: #f9f9f9;
+    border-radius: var(--radius);
+    border: var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    
+  }
+  
+  h1{
+    text-align: center;
+    font-size: calc(var(--font-size) * 3);
+  }
+  
+  .messages{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: white;
+    align-items: center;
+    overflow-y: auto;
+    border: var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .sent{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: flex-end;
+    margin: 0.5rem 0;
+  }
+  
+  .recieved{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    align-self: flex-start;
+    margin: 0.5rem 0;
+  }
+  
+  .sent img, .recieved img{
+    height: 2rem;
+    border-radius: 50%;
+  }
+  
+  .sent p, .recieved p{
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    border-radius: var(--radius);
+    color: white;
+    font-size: medium;
+  }
+  
+  .sent p{
+    background-color: rgb(66, 140, 92);
+    margin-right: 0.5rem;
+  }
+  
+  .name {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #aaa;
+    font-size: small;
+    position: relative;
+    margin: bottom;
+  
+    
+  }
+  
+  .recieved .name {
+    text-align: left;
+    padding-left: 5px;
+    padding-bottom: 5px;
+  }
+  
+  .sent .name {
+    text-align: right;
+    padding-bottom: 5px;
+    padding-right: 5px;
+  }
+  
+  .className {
+    display: flex;
+    flex: 70%;
+  }
+  
+  .recieved p{
+    background-color: #aaa;
+    margin-left: 0.5rem;
+  }
+  
+  .sendMessage{
+    margin-top: 2rem;
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: medium;
+  }
+  
+  .sendMessage input{
+    all: unset;
+    width: 60%;
+    border-radius: var(--radius);
+    border: var(--border);
+    background-color: white;
+    padding: 0 1rem;
+  }
+  
+  .sendMessage input:focus{
+    border: 2px solid teal;
+  }
+  
+  .sendMessage button{
+    width: 25%;
+    border-radius: var(--radius);
+    cursor: pointer;
+    border: var(--border);
+    background-color: rgb(178, 173, 173);
+    transition: 0.25s;
+    font-size: calc(var(--font-size) * 2);
+  }
+  
+  .sendMessage button:hover{
+    background-color: teal;
+    color: white;
+  }
+  
+  .buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    font-size: medium;
+  }
+  
+  .login, .logout{
+    width: fit-content;
+    padding: 0.25rem 1.5rem;
+    border-radius: var(--radius);
+    border: var(--border);
+    transition: 0.25s;
+    font-size: medium;
+  }
+  
+  .login:hover{
+    background-color: teal;
+    color: white;
+  }
+  
+  .logout:hover{
+    background-color: #ff0033;
+    color: white;
+  }
+  
+  .header {
+    flex: 30%;
+    background-image: ;
+  }

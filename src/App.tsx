@@ -16,7 +16,7 @@ function App() {
   return (
     <div>
       <Navbar/>
-      <Container className='mb-4' fluid
+      <Container fluid
         style={{
           marginLeft: 0,
           marginRight: 0,

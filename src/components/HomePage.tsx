@@ -23,7 +23,7 @@ export function HomePage () {
           paddingBottom: 0,
           paddingTop: 0,
           paddingRight: 0,
-          objectFit: "cover"
+          objectFit: "cover",
           
           
         }}

@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { Auth } from "./Auth";
@@ -11,7 +11,10 @@ export function ChatForm() {
     useEffect(() => {
       const getUsers = async () => {
         const data = await getDocs(usersCollectionRef);
-        setForm(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        const lastForm = query(usersCollectionRef, orderBy("createdAt", "desc"), limit(1));
+        setForm([lastForm])
+        // setForm(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        
       };
   
       getUsers();
@@ -19,19 +22,18 @@ export function ChatForm() {
   
     return (
       <div>
-        <Auth/>
         {form.map((message) => {
   
         return (
-         <div>
+         <div className="fs-4">
           {' '}
-          <h1>Name: {message.name}</h1>
-          <h1>Year: {message.year}</h1>
-          <h1>Make: {message.make}</h1>
-          <h1>Model: {message.model}</h1>
-          <h1>Problem: {message.issue}</h1>
-          <h1>Problem Description: {message.extra}</h1>
-          <h1>Photos: {message.media}</h1>
+          <div>Name: {message.name}</div>
+          <div>Year: {message.year}</div>
+          <div>Make: {message.make}</div>
+          <div>Model: {message.model}</div>
+          <div>Problem: {message.issue}</div>
+          <div>Problem Description: {message.extra}</div>
+          <div>Photos: {message.media}</div>
       
           </div>
         );
