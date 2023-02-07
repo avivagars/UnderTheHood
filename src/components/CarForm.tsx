@@ -1,11 +1,10 @@
-import { useState, useEffect, SyntheticEvent } from "react";
+import { useState, SyntheticEvent } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import { db } from '../firebase';
-import {collection, getDocs, onSnapshot, addDoc, updateDoc, doc, deleteDoc, setDoc} from "firebase/firestore";
+import {collection, addDoc} from "firebase/firestore";
 import Button from "react-bootstrap/Button";
-import { Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import RangeSlider from "react-bootstrap-range-slider";
 
@@ -35,13 +34,13 @@ export function CarForm() {
   }
   console.log(formData)
 
-
+  const navigate = useNavigate();
   const createUser = async (e: SyntheticEvent) => {
     e.preventDefault()
     await addDoc(usersRef, formData);
+    navigate('/chat');
 
     alert("Form Successfully Submitted")
-    // console.log("form submittedddd")
     setFormData({
     name: " ",
     email: " ",
@@ -64,6 +63,7 @@ form?.addEventListener('submit', e => {
 
   return (
     <div className='container'>
+      <header className="fs-3">Please fill in the following information...</header>
     <Form onSubmit={createUser}>
       <Form.Group className="mb-3">
         <Form.Label>Name</Form.Label>
@@ -123,9 +123,7 @@ form?.addEventListener('submit', e => {
         <Form.Control as="textarea" rows={3} type="text" name="extra" value={formData.extra} onChange={handleChange}/>
       </Form.Group>
       
-      {/* <Nav.Link to="/chat" as={NavLink}>  */}
       <Button value="Submit Form" type="submit"> Submit Form</Button>
-      {/* </Nav.Link> */}
       
     </Form>
     </div>

@@ -24,7 +24,7 @@ export function Navbar() {
           </Nav.Link>
           <Button
             style={{ width: "4rem", height: "3rem", position: "relative" }}
-            className="square bg-success rounded-pill"
+            className="square btn-success rounded-pill"
           > Login </Button>
         </Nav>
        
