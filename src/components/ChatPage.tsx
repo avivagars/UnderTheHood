@@ -40,11 +40,16 @@ function ChatPage() {
     message: Message;
     key: string;
   };
+
+  interface Options {
+    idField: string;
+  }
+
   const [user] = useAuthState(auth);
 
   const messageRef = collection(db, "messages");
   const queryRef = query(messageRef, orderBy("createdAt", "desc"), limit(20));
-  const [messages] = useCollection(queryRef, {idField: 'id'})
+  const [messages] = useCollection(queryRef, { })
 
 
 
@@ -72,9 +77,18 @@ function ChatPage() {
     setFormValue("");
   };
 
-  // useEffect(() => {
-  //   scrollTo.current.scrollIntoView({behavior: "smooth"})
-  // }, [messages])
+//   useEffect(() => {
+//     scrollTo.current.scrollIntoView({behavior: "smooth"})
+//   }, [messages])
+
+// useEffect(() => {
+//     if (scrollTo.current) {
+//       scrollTo.current.scrollIntoView({ behavior: "smooth" });
+//     }
+//   }, [messages]);
+
+
+  
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -114,8 +128,8 @@ function ChatPage() {
         <div ref={scrollTo}></div>
 
         {messages &&
-          messages.map((msg) => (
-            <ChatMessage key={msg.id} message={msg.data()} />
+          messages.docs.map((msg) => (
+            <ChatMessage key={msg.id} message={msg.data() as Message} />
           ))}
       </div>
       <form>
