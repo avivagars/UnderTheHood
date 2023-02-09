@@ -30,7 +30,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage/>} />
           <Route path='/form' element={<CarForm/>} />
-          <Route path='/chat' element={<ChatPage/>} />
+          <Route path='/chat/:id' element={<ChatPage/>} />
           <Route path='/map' element={<Map/>}/>
         </Routes>
       </Container>

@@ -17,6 +17,7 @@ export function CarForm() {
   const [formData, setFormData] = useState({
     name: " ",
     email: " ",
+    zip: " ",
     year: 2023,
     make: " ",
     model: " ",
@@ -38,13 +39,15 @@ export function CarForm() {
   const navigate = useNavigate();
   const createUser = async (e: SyntheticEvent) => {
     e.preventDefault()
-    await addDoc(usersRef, formData);
-    navigate('/chat');
+    const doc = await addDoc(usersRef, formData);
+    
+    navigate(`/chat/${doc.id}`);
 
     alert("Form Successfully Submitted")
     setFormData({
     name: " ",
     email: " ",
+    zip: " ",
     year: 2023,
     make: " ",
     model: " ",
@@ -76,6 +79,11 @@ form?.addEventListener('submit', e => {
         <Form.Control type="email" placeholder="Enter email" name="email" value={formData.email} onChange={handleChange} />
         <div className="invalid-feedback">Invalid email</div>
         <div className="valid-feedback">correct</div>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Zip Code </Form.Label>
+        <Form.Control type="number" placeholder="Enter your zip code" name="zip" value={formData.zip} onChange={handleChange}/>
       </Form.Group>
 
       <Form.Group className="mb-3">

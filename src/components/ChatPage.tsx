@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import firebase from "firebase/app";
 import './ChatPage.css'
 import {
@@ -27,7 +27,9 @@ import { Auth } from "./Auth";
 import { ChatForm } from "./ChatForm";
 import { DocumentData } from "@firebase/firestore-types";
 import person from "../person_circle.png"
-import { Container } from "react-bootstrap";
+import { Button, Container, Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function ChatPage() {
   interface Message {
@@ -49,8 +51,9 @@ function ChatPage() {
   }
 
   const [user] = useAuthState(auth);
+  const formId = window.location.pathname.split('/').at(-1)
 
-  const messageRef = collection(db, "messages");
+  const messageRef = collection(db, `users/${formId}/messages`);
   const queryRef = query(messageRef, orderBy("createdAt", "desc"), limit(20));
   const [messages] = useCollection(queryRef, { })
 
@@ -121,6 +124,9 @@ function ChatPage() {
     );
   }
 
+
+
+
   return (
     <>
      <h6 className="fs-1">
@@ -130,7 +136,7 @@ function ChatPage() {
      
       
       <div className="header"></div>
-      <img className="img-fluid mx-auto d-block" style={{width: 150, height: 180 }} src={person} alt="person-icon" />;
+      <img className="img-fluid mx-auto d-block" style={{width: 150, height: 180 }} src={person} alt="person-icon" />
       <h1 className="fs-3">Messages</h1>
       
       <div className="messages">
@@ -157,6 +163,9 @@ function ChatPage() {
             Log out
           </button>
         )}
+       <Nav.Link to="/map" as={NavLink}>
+        <button value="Submit Form" type="submit"> End Chat </button>
+       </Nav.Link>
       </div>
     </div>
     </>
