@@ -29,6 +29,7 @@ export function CarForm() {
 
   const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    console.log("submitted")
     return <img src={fileUrl} alt="from Firebase" />;
     
   };
@@ -168,7 +169,7 @@ form?.addEventListener('submit', e => {
       
     </Form>
     <form onSubmit={onSubmit}>
-      <input type="file" onChange={onFileChange}></input>
+      <input type="file" multiple onChange={onFileChange}></input>
       <button>Submit Image</button>
       </form>
       <img width="100" height="100" src={fileUrl} alt="from storage"/>

@@ -30,7 +30,7 @@ import person from "../person_circle.png"
 import { Button, Container, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getStorage, ref } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
 function ChatPage() {
   interface Message {
@@ -50,6 +50,16 @@ function ChatPage() {
   interface Options {
     idField: string;
   }
+  const[fileUrl, setFileUrl] = useState<string | undefined>('');
+
+  const pressButton = async (e: any) => {
+    e.preventDefault();
+    const storage = getStorage();
+    setFileUrl(await getDownloadURL(ref(storage, "car4.jpg")));
+    
+    return <img src={fileUrl} alt="from Firebase" />;
+  }  
+  
 
   const [user] = useAuthState(auth);
   const formId = window.location.pathname.split('/').at(-1)
@@ -131,6 +141,10 @@ function ChatPage() {
      <h6 className="fs-1">
       <ChatForm/>
       </h6>
+      <form >
+      <button onClick={pressButton}>Get Images</button>
+      </form>
+      <img width="100" height="100" src={fileUrl} alt="from storage"/>
     <div className="Chat">
      
       
