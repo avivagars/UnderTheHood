@@ -1,16 +1,38 @@
-import { useState, SyntheticEvent } from "react";
+import { useState, SyntheticEvent, useEffect } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import { db } from '../firebase';
-import {collection, addDoc} from "firebase/firestore";
+import {collection, addDoc, getDocs, setDoc, doc} from "firebase/firestore";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import RangeSlider from "react-bootstrap-range-slider";
+import { app } from "../firebase"
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
 
 
 export function CarForm() {
+
+  const[fileUrl, setFileUrl] = useState<string | undefined>('');
+
+  const onFileChange = async (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const file = e.currentTarget.files![0];
+    const storage = getStorage();
+    const storageRef = ref(storage, file.name)
+    const fileRef = uploadBytesResumable(storageRef, file)
+    await fileRef
+    setFileUrl(await getDownloadURL(storageRef))
+    
+
+  }
+
+  const onSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    return <img src={fileUrl} alt="from Firebase" />;
+    
+  };
+
 
   const usersRef = collection(db, "users");
 
@@ -34,7 +56,7 @@ export function CarForm() {
       }
     })
   }
-  console.log(formData)
+
 
   const navigate = useNavigate();
   const createUser = async (e: SyntheticEvent) => {
@@ -101,29 +123,23 @@ form?.addEventListener('submit', e => {
         <Form.Label>Model</Form.Label>
         <Form.Control type="text" placeholder="Car Model..." name="model" value={formData.model} onChange={handleChange} />
       </Form.Group>
-    <Dropdown>
-      <select className="form-select">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </select>
-    </Dropdown>
 
-      <Dropdown>
-        <Dropdown.Toggle className="mb-3 form-select" variant="success" >
-          General Issue:
+      <Dropdown >
+        <Dropdown.Toggle className="mb-3 form-select" variant="success" id="dropdown-basic">
+          Select General Issue {formData.issue}
         </Dropdown.Toggle>
-        <Dropdown.Menu className="form-select">
-          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <Dropdown.Menu className="form-select" onSelect={handleChange}>
+          
+          <Dropdown.Item eventKey="Action">Action</Dropdown.Item>
+          <Dropdown.Item eventKey="Another Action">Another action</Dropdown.Item>
+          <Dropdown.Item eventKey="Something Action">Something else</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-
-      <Form.Group className="mb-3" controlId="formFileMultiple">
+      
+      {/* <Form.Group className="mb-3" controlId="formFileMultiple">
         <Form.Label>Upload Photos/Videos/Audio</Form.Label>
         <Form.Control type="file" placeholder=".jpg, .png...." name="media" onChange={handleChange}/>
-      </Form.Group>
+      </Form.Group> */}
 
       <Form.Group className="mb-3">
         <Form.Label>
@@ -132,9 +148,19 @@ form?.addEventListener('submit', e => {
         <Form.Control as="textarea" rows={3} type="text" name="extra" value={formData.extra} onChange={handleChange}/>
       </Form.Group>
       
+      
       <Button value="Submit Form" type="submit"> Submit Form</Button>
       
     </Form>
+    <form onSubmit={onSubmit}>
+      <input type="file" onChange={onFileChange}></input>
+      <button>Submit Image</button>
+      </form>
+      <img width="100" height="100" src={fileUrl} alt="from storage"/>
+      
+    
     </div>
   );
 };
+
+

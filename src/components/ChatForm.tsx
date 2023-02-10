@@ -1,14 +1,15 @@
 import { collection, doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { Card } from "react-bootstrap";
 import { db } from "../firebase";
 import { Auth } from "./Auth";
 
 export function ChatForm() {
     const [form, setForm] = useState<Array<any>>([]);
     const usersCollectionRef = collection(db, "users");
-    console.log(usersCollectionRef)
-    const formId = window.location.pathname.split('/').at(-1)
-    console.log(formId)
+    // console.log(usersCollectionRef)
+    // const formId = window.location.pathname.split('/').at(-1)
+    // console.log(formId)
     const docRef = doc(db, "users", "9N7QzaeJRtdo2KUkOgf8")
 
 
@@ -62,7 +63,7 @@ export function ChatForm() {
         {form.map((message, index) => {
   
         return (
-         <div key={index} className="fs-4">
+         <Card key={index} className="fs-4">
           {' '}
           <div>Name: {message.name}</div>
           <div>Year: {message.year}</div>
@@ -72,7 +73,7 @@ export function ChatForm() {
           <div>Problem Description: {message.extra}</div>
           <div>Photos: {message.media}</div>
       
-          </div>
+          </Card>
         );
       })}
       </div>

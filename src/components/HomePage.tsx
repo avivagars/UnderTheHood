@@ -4,8 +4,14 @@ import carImg from "../car.jpg";
 import car from "../car6.jpg"
 import "./HomePage.css";
 import { Footer } from "../components/Footer"
+import { SyntheticEvent, useState } from "react";
 
 export function HomePage () {
+    const [issue, setIssue] = useState('')
+    const handleIssue = (e:React.ChangeEvent<HTMLInputElement>) => {
+        console.log("I was clicked")
+        setIssue(e.target.value)
+    } 
     return (
         <Container fluid
         style={{
@@ -50,6 +56,7 @@ export function HomePage () {
                     <Col>
                     <Nav.Link to="/form" as={NavLink}> 
                         <Button 
+                        value = "Pricing"
                         style={{ width: "9rem", height: "4rem"}}
                         type="button" 
                         className="btn btn-success btn-lg">Pricing</Button>

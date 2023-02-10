@@ -30,6 +30,7 @@ import person from "../person_circle.png"
 import { Button, Container, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { getStorage, ref } from "firebase/storage";
 
 function ChatPage() {
   interface Message {
@@ -56,8 +57,6 @@ function ChatPage() {
   const messageRef = collection(db, `users/${formId}/messages`);
   const queryRef = query(messageRef, orderBy("createdAt", "desc"), limit(20));
   const [messages] = useCollection(queryRef, { })
-
-
 
   
   const [formValue, setFormValue] = useState("");
@@ -151,7 +150,7 @@ function ChatPage() {
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
         />
-        <button onClick={(e) => sendMessage(e)}>Send</button>
+        <button className="btn btn-dark btn-lg" style={{width: "9rem"}} onClick={(e) => sendMessage(e)}>Send</button>
       </form>
       <div className="buttons">
         {!user ? (
@@ -164,7 +163,7 @@ function ChatPage() {
           </button>
         )}
        <Nav.Link to="/map" as={NavLink}>
-        <button value="Submit Form" type="submit"> End Chat </button>
+        <button className="btn btn-success"value="Submit Form" type="submit"> End Chat </button>
        </Nav.Link>
       </div>
     </div>
