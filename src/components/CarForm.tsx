@@ -34,6 +34,11 @@ export function CarForm() {
   };
 
 
+  const issue = window.location.pathname.split('/').at(-1)
+  console.log(issue)
+  
+
+
   const usersRef = collection(db, "users");
 
   const [formData, setFormData] = useState({
@@ -43,7 +48,7 @@ export function CarForm() {
     year: 2023,
     make: " ",
     model: " ",
-    issue: " ",
+    issue: "Select Issue",
     media: " ",
     extra: " "
   })
@@ -53,6 +58,15 @@ export function CarForm() {
       return {
         ...prevState,
         [e.target.name]: e.target.value
+      }
+    })
+  }
+
+  const handleClick = (e: any) => {
+    setFormData(prevFormData => {
+      return {
+        ...prevFormData,
+        issue: e.target.name
       }
     })
   }
@@ -89,6 +103,7 @@ form?.addEventListener('submit', e => {
 
   return (
     <div className='container'>
+      <header>{issue}</header>
       <header className="fs-3">Please fill in the following information...</header>
     <Form onSubmit={createUser}>
       <Form.Group className="mb-3">
@@ -126,11 +141,11 @@ form?.addEventListener('submit', e => {
 
       <Dropdown >
         <Dropdown.Toggle className="mb-3 form-select" variant="success" id="dropdown-basic">
-          Select General Issue {formData.issue}
+         {formData.issue}
         </Dropdown.Toggle>
         <Dropdown.Menu className="form-select" onSelect={handleChange}>
           
-          <Dropdown.Item eventKey="Action">Action</Dropdown.Item>
+          <Dropdown.Item eventKey="Action" name="pricing" onClick={handleClick}>Action</Dropdown.Item>
           <Dropdown.Item eventKey="Another Action">Another action</Dropdown.Item>
           <Dropdown.Item eventKey="Something Action">Something else</Dropdown.Item>
         </Dropdown.Menu>

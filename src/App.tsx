@@ -29,7 +29,7 @@ function App() {
         }}>
         <Routes>
           <Route path='/' element={<HomePage/>} />
-          <Route path='/form' element={<CarForm/>} />
+          <Route path='/form/:issue' element={<CarForm/>} />
           <Route path='/chat/:id' element={<ChatPage/>} />
           <Route path='/map' element={<Map/>}/>
         </Routes>

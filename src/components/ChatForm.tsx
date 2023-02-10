@@ -7,18 +7,15 @@ import { Auth } from "./Auth";
 export function ChatForm() {
     const [form, setForm] = useState<Array<any>>([]);
     const usersCollectionRef = collection(db, "users");
-    // console.log(usersCollectionRef)
-    // const formId = window.location.pathname.split('/').at(-1)
-    // console.log(formId)
-    const docRef = doc(db, "users", "9N7QzaeJRtdo2KUkOgf8")
-
+    const formId = window.location.pathname.split('/').at(-1)
+    const docRef = doc(usersCollectionRef, formId)
+    
 
     useEffect (() => {
       getDoc(docRef)
     .then((doc) => {
-      console.log(doc.data(), doc.id)
-      setForm([doc.data(), doc.id] )
-
+      setForm([doc.data()] )
+      console.log(doc.data)
     })
       
     }, []);
@@ -71,8 +68,6 @@ export function ChatForm() {
           <div>Model: {message.model}</div>
           <div>Problem: {message.issue}</div>
           <div>Problem Description: {message.extra}</div>
-          <div>Photos: {message.media}</div>
-      
           </Card>
         );
       })}
