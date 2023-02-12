@@ -27,10 +27,10 @@ import { Auth } from "./Auth";
 import { ChatForm } from "./ChatForm";
 import { DocumentData } from "@firebase/firestore-types";
 import person from "../person_circle.png"
-import { Button, Container, Nav } from "react-bootstrap";
+import { Button, Col, Container, Nav, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytesResumable, listAll } from "firebase/storage";
 
 function ChatPage() {
   interface Message {
@@ -47,18 +47,38 @@ function ChatPage() {
     key: string;
   };
 
-  interface Options {
-    idField: string;
-  }
-  const[fileUrl, setFileUrl] = useState<string | undefined>('');
+  // const[fileUrl, setFileUrl] = useState<string | undefined>('');
+  const[fileUrl, setFileUrl] = useState<string[]>([]);
 
-  const pressButton = async (e: any) => {
-    e.preventDefault();
-    const storage = getStorage();
-    setFileUrl(await getDownloadURL(ref(storage, "car4.jpg")));
-    
-    return <img src={fileUrl} alt="from Firebase" />;
-  }  
+
+
+useEffect(() => {
+  function listAllItems(): void {
+    const storage=getStorage();
+    const listRef = ref(storage, 'images/')
+  // Find all the prefixes and items.
+  listAll(listRef)
+  .then((res: { items: { name: string; }[]; }) => {
+    res.items.forEach((item: { name: string; }) => {
+      setFileUrl((arr: string[])=>[...arr, item.name]);
+    })
+  })
+  .catch((err: { message: any; }) => {
+    alert(err.message);
+  })
+  };
+  listAllItems()
+
+},[])
+
+
+// useEffect(() => {
+//   const loadImages = async (e: any) => {
+//     const storage = getStorage();
+//     setFileUrl(await getDownloadURL(ref(storage, "images/IMG_7947.jpg")));
+//   };
+//   loadImages(null);
+// }, []);
   
 
   const [user] = useAuthState(auth);
@@ -138,16 +158,24 @@ function ChatPage() {
 
   return (
     <>
+    <Row>
+      <Col>
      <h6 className="fs-1">
       <ChatForm/>
       </h6>
-      <form >
-      <button onClick={pressButton}>Get Images</button>
-      </form>
-      <img width="100" height="100" src={fileUrl} alt="from storage"/>
-    <div className="Chat">
+      </Col>
+      <Col>
+      {fileUrl}
+      {/* {fileUrl.map((img, index) => (
+        <div key={index}>
+          <img src={img.src} alt=""/>
+        </div>
+      ))} */}
+      {/* <img width="200px" height="200px" src={fileUrl} alt="from storage"/> */}
+      </Col>
+    </Row>
      
-      
+    <div className="Chat">
       <div className="header"></div>
       <img className="img-fluid mx-auto d-block" style={{width: 150, height: 180 }} src={person} alt="person-icon" />
       <h1 className="fs-3">Messages</h1>

@@ -23,6 +23,7 @@ export function CarForm() {
     const fileRef = uploadBytesResumable(storageRef, file)
     await fileRef
     setFileUrl(await getDownloadURL(storageRef))
+    alert("files submitted")
     
 
   }
@@ -168,10 +169,10 @@ form?.addEventListener('submit', e => {
       <Button value="Submit Form" type="submit"> Submit Form</Button>
       
     </Form>
-    <form onSubmit={onSubmit}>
+    <div onSubmit={onSubmit}>
       <input type="file" multiple onChange={onFileChange}></input>
-      <button>Submit Image</button>
-      </form>
+      <button>Upload Files to Storage</button>
+      </div>
       <img width="100" height="100" src={fileUrl} alt="from storage"/>
       
     

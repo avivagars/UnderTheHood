@@ -9,26 +9,24 @@ import { Button, Card, Container, ListGroup, Row } from 'react-bootstrap';
 export default function Map() {
 const google = window.google;
 // const [libraries ]= useState("places")
+const apiKey: string|undefined = process.env.REACT_APP_GOOGLE_API_KEY;
+if (!apiKey) {
+  throw new Error('Google Maps API key is missing');
+}
 const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDwkDWZTrafBBdNISEOyo1eNyoKp71nriQ',
+    googleMapsApiKey: apiKey
     // libraries: libraries
-    
 });
 
     const getCurrentLocation = () => {
       navigator.geolocation.getCurrentPosition(res => {
           const [lat, lng] = [res.coords.latitude, res.coords.longitude];
           console.log(lat, lng)
-          setCenter({lat, lng});
-          
+          setCenter({lat, lng}); 
       });
   };
 
-
-// sets the center of my map to atlanta
-
-// var atlanta = useMemo(() => ({lat:44, lng:-80}), []);
-var mapCenter = {lat:44, lng:-80};
+var mapCenter = {lat:33.7488, lng:-84.3877};
 const [center, setCenter] = useState(mapCenter)
 
 
@@ -86,19 +84,19 @@ const autocomplete = new google.maps.places.Autocomplete(input)
             radius: 500,
             type: 'car_repair'
         }
-    //    const service = new google.maps.places.PlacesService(map)
-    //     service.nearbySearch(request, callback)
-    
+      //  const service = new google.maps.places.PlacesService(map)
+      //   service.nearbySearch(request, callback)
 
     })
 }
 
 // function callback(results: google.maps.places.PlaceResult[]| null, status: google.maps.places.PlacesServiceStatus ) {
 //     if (status === google.maps.places.PlacesServiceStatus.OK) {
-//         for (var i = 0; i < results.length; i++) {
-//             var place = results[i];
+//       console.log("okay")
+//         // for (var i = 0; i < results.length; i++) {
+//         //     var place = results[i];
 //             createMarker(place);
-//         }
+//         // }
 //     }
 // }
 
@@ -129,17 +127,6 @@ return (
    onClick={getCurrentLocation}>Go</Button> 
   
   </header>
-  
-  {/* {zip.map((message, index) => {
-  return (
-   <div key={index} className="fs-4">
-    {' '}
-    <div>Zip: {message.zip}</div>
-    </div>
-  );
-})} */}
-  
-    {/* <input id="searchTextField" type="text"/> */}
   
     <GoogleMap 
         zoom={9}
