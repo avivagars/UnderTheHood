@@ -1,5 +1,4 @@
 import { MDBContainer, MDBFooter } from "mdb-react-ui-kit";
-import React from 'react';
 
 export function Footer() {
     return (

@@ -32,7 +32,6 @@ export function CarForm() {
 
   // grab the url name and display it on the top
   const issue = window.location.pathname.split("/").at(-1);
-  // const capIssue = issue.toUpperCase()
   console.log(issue);
 
   // take values of form and add them to state
@@ -62,10 +61,9 @@ export function CarForm() {
     const fileRef = uploadBytesResumable(storageRef, file);
     await fileRef;
     setFileUrl(await getDownloadURL(storageRef));
-    alert("files submitted");
   };
 // allows user to see the file 
-  const onSubmitMedia = (e: SyntheticEvent) => {
+  const onSubmitMedia = async (e: SyntheticEvent) => {
     e.preventDefault();
     console.log("submitted");
     return <img src={fileUrl} alt="from Firebase" />;
@@ -108,7 +106,7 @@ export function CarForm() {
       <header className="fs-3" style={{paddingTop: "40px", paddingBottom: "20px"}}>
         Please fill in the following information...
       </header>
-      <Form onSubmit={submitForm}>
+      <Form onSubmit={submitForm} style={{paddingBottom: "20px"}}>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -200,11 +198,7 @@ export function CarForm() {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <div onSubmit={onSubmitMedia}>
-        <input type="file" multiple onChange={onFileUploadChange}></input>
-        <button>Upload Files to Storage</button>
-      </div>
-      <img width="100" height="100" src={fileUrl} alt="from storage" />
+       
         <Form.Group className="mb-3">
           <Form.Label>
             Anything additional you would like to share with the specialist?
@@ -223,6 +217,11 @@ export function CarForm() {
           Submit Form
         </Button>
       </Form>
+      <div onSubmit={onSubmitMedia}>
+        <input type="file" onChange={onFileUploadChange} multiple></input>
+        <button>Upload Files to Storage</button>
+      </div>
+      <img width="200" height="200" src={fileUrl} alt="firebase storage" />
     </div>
   );
 }

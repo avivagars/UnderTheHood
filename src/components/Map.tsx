@@ -2,6 +2,7 @@ import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import "./map.css";
 import { useState, useEffect } from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
+import direction from "../get-directions-button.png"
 
 export default function Map() {
   const google = window.google;
@@ -101,10 +102,11 @@ export default function Map() {
       </GoogleMap>
       <Card border="Primary">
         <ListGroup variant="flush">
-          <ListGroup.Item>{places.map((place:any) => (place.name))}</ListGroup.Item>
-          <ListGroup.Item>Search Results 2</ListGroup.Item>
-          <ListGroup.Item>Search Results 3</ListGroup.Item>
-          <ListGroup.Item>Search Results 4</ListGroup.Item>
+          <ListGroup.Item className="fs-5">
+            {places.map((place:any, id) => 
+            <div>{place.name}
+            <img className=" " style={{width: 20, height: 20 }} src={direction} alt="direction-icon"/>
+            </div>)}</ListGroup.Item>
         </ListGroup>
       </Card>
     </div>
