@@ -54,7 +54,7 @@ export function HomePage () {
             <Container className="gy-2" style={{marginTop: 30}}>
                 <Row className="text-center align-middle btn-group container row">
                     <Col>
-                    <Nav.Link to="/form/pricing" as={NavLink}> 
+                    <Nav.Link to="/form/Pricing" as={NavLink}> 
                         <Button 
                         value = "Pricing"
                         style={{ width: "9rem", height: "4rem"}}
@@ -63,7 +63,7 @@ export function HomePage () {
                     </Nav.Link>
                     </Col>
                     <Col>
-                    <Nav.Link to="/form/diagnostic" as={NavLink}> 
+                    <Nav.Link to="/form/Diagnostic" as={NavLink}> 
                         <Button 
                         style= {{ width: "9rem", height: "4rem", }}
                         type="button" 
@@ -71,7 +71,7 @@ export function HomePage () {
                     </Nav.Link>
                     </Col>
                     <Col>
-                    <Nav.Link to="/form/other" as={NavLink}> 
+                    <Nav.Link to="/form/Other" as={NavLink}> 
                         <Button 
                         style= {{ width: "9rem", height: "4rem", }} 
                         type="button" 

@@ -1,8 +1,7 @@
-import { collection, doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
+import { collection, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { db } from "../firebase";
-import { Auth } from "./Auth";
 
 export function ChatForm() {
     const [form, setForm] = useState<Array<any>>([]);
@@ -17,43 +16,7 @@ export function ChatForm() {
       setForm([doc.data()] )
       console.log(doc.data)
     })
-      
     }, []);
-    
-
-
-    
-  
-    // useEffect(() => {
-    //   const getUsers = async () => {
-    //     const data = await getDocs(usersCollectionRef);
-    //     setForm(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-
-        // const docSnap = await getDoc(usersCollectionRef);
-        // setForm([docSnap])
-        
-        
-
-
-        // const q = query(collection(db, 'users'), where("model", '==', "civic"));
-        // setForm([q])
-        // console.log(q)
-        // console.log(formId)
-
-        
-
-        // const form = await getDoc(doc(db, 'users', formId))
-        // console.log("form", form)
-        // usersCollectionRef.doc(formId).get()
-        // const lastForm = query(usersCollectionRef, orderBy("createdAt", "desc"), limit(1));
-        // setForm([lastForm])
-        // console.log('forms', data.docs[data.docs.length-1].id)
-        
-        
-    //   };
-  
-    //   getUsers();
-    // }, []);
   
     return (
       <div>
