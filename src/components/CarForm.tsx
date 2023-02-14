@@ -12,6 +12,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { Container, Row } from "react-bootstrap";
 
 
 export function CarForm() {
@@ -63,11 +64,11 @@ export function CarForm() {
     setFileUrl(await getDownloadURL(storageRef));
   };
 // allows user to see the file 
-  const onSubmitMedia = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    console.log("submitted");
-    return <img src={fileUrl} alt="from Firebase" />;
-  };
+  // const onSubmitMedia = async (e: SyntheticEvent) => {
+  //   e.preventDefault();
+  //   console.log("submitted");
+  //   return <img src={fileUrl} alt="from Firebase" />;
+  // };
 
   // submits form to database, resets form
   const usersRef = collection(db, "users");
@@ -75,10 +76,12 @@ export function CarForm() {
   const submitForm = async (e: SyntheticEvent) => {
     e.preventDefault();
     const doc = await addDoc(usersRef, formData);
+    
 
     navigate(`/chat/${doc.id}`);
 
     alert("Form Successfully Submitted");
+    alert("You are being connected with a specialist...")
     setFormData({
       name: " ",
       email: " ",
@@ -90,6 +93,7 @@ export function CarForm() {
       media: " ",
       extra: " ",
     });
+    return <img src={fileUrl} alt="from Firebase" />;
   };
 
 //creates validation for form 
@@ -154,17 +158,19 @@ export function CarForm() {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Make</Form.Label>
+          <Form.Label style = {{marginRight: "5px"}}>Make</Form.Label>
+          <Form.Label className="text-secondary">(i.e Toyota, BMW, Subaru...)</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Car Make..."
+            placeholder="Car Make"
             name="make"
             value={formData.make}
             onChange={handleFormChange}
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Model</Form.Label>
+          <Form.Label style = {{marginRight: "5px"}}>Model</Form.Label>
+          <Form.Label className="text-secondary">(i.e Corolla, M3, Outback...)</Form.Label>
           <Form.Control
             type="text"
             placeholder="Car Model..."
@@ -188,7 +194,7 @@ export function CarForm() {
               name="pricing"
               onClick={handleSelectDropdown}
             >
-              Action
+              Pricing
             </Dropdown.Item>
             <Dropdown.Item eventKey="Another Action">
               Another action
@@ -212,16 +218,19 @@ export function CarForm() {
             onChange={handleFormChange}
           />
         </Form.Group>
-        <Button value="Submit Form" type="submit">
+        <div>
+        <input type="file" onChange={onFileUploadChange} multiple></input>
+        {/* <button>Upload Files to Storage</button> */}
+      </div>
+      <img height="200" src={fileUrl} alt="" />
+      <Container className="text-center align-middle">
+        <Button style ={{margin: "20px", padding: "10px"}}value="Submit Form" type="submit">
           {" "}
           Submit Form
         </Button>
+      </Container>  
       </Form>
-      <div onSubmit={onSubmitMedia}>
-        <input type="file" onChange={onFileUploadChange} multiple></input>
-        <button>Upload Files to Storage</button>
-      </div>
-      <img width="200" height="200" src={fileUrl} alt="firebase storage" />
+      
     </div>
   );
 }

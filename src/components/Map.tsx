@@ -45,7 +45,7 @@ export default function Map() {
 
     let request: Irequest = {
       location: currentLocation,
-      radius: 1000,
+      radius: 2000,
       type: "car_repair",
     };
 
@@ -76,7 +76,7 @@ export default function Map() {
     <div>
       <div id="map"></div>
       <header className="fs-2 text-center">
-        Auto Shops In Your Area
+        Find Auto Shops In Your Area
         <Button 
    style={{ width: "9rem", height: "3rem", marginLeft: "15px", marginBottom: "15px"}} 
    className="fs-3"

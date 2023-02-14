@@ -25,6 +25,7 @@ import { Col, Nav, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { url } from "inspector";
+import { Auth } from "./Auth";
 
 function ChatPage() {
   interface Message {
@@ -44,6 +45,7 @@ function ChatPage() {
   
 
 useEffect(() => {
+  
   function listAllItems(): void {
     const storage=getStorage();
     const listRef = ref(storage)
@@ -109,14 +111,14 @@ console.log(fileUrl)
     setFormValue("");
   };
 
-  const googleSignIn = () => {
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
-  };
+  // const googleSignIn = () => {
+  //   const provider = new GoogleAuthProvider();
+  //   return signInWithPopup(auth, provider);
+  // };
 
-  const logOut = () => {
-    signOut(auth);
-  };
+  // const logOut = () => {
+  //   signOut(auth);
+  // };
 
   function ChatMessage(props: ChatMessageProps) {
     if (!auth.currentUser) return null;
@@ -138,9 +140,6 @@ console.log(fileUrl)
     );
   }
 
-
-
-
   return (
     <>
     <Row>
@@ -149,12 +148,12 @@ console.log(fileUrl)
       <ChatForm/>
       </h6>
       </Col>
-      <Col>
+      <Col className="d-flex flex-row overflow-auto">
       {/* {fileUrl} */}
       {fileUrl.map((img: string, index: any) => (
-        <Col key={index}>
-          <img width="200px" height="200px" src={img} alt=""/>
-        </Col>
+        <div className= "" key={index}>
+          <img className= "border border-dark" style={{margin: "10px"}} height="200px" src={img} alt=""/>
+        </div>
       ))}
       
       
@@ -164,7 +163,22 @@ console.log(fileUrl)
     <div className="Chat">
       <div className="header"></div>
       <img className="img-fluid mx-auto d-block" style={{width: 150, height: 180 }} src={person} alt="person-icon" />
-      <h1 className="fs-3">Messages</h1>
+      {/* <h1 className="fs-3">Messages</h1>
+       */}
+      <h1 className="fs-3">{!user ? 'Please login with Google' : 'Messages'}</h1>
+      <div className="text-center align-middle">
+      {/* {!user ? (
+          <button className='btn btn-success' onClick={() => googleSignIn()}>
+            Login
+          </button>
+        ) : (
+          <button className="btn btn-success" onClick={() => logOut()}>
+            Log out
+          </button>
+        )} */}
+          <Auth/>
+        </div>
+      
       
       <div className="messages">
         <div ref={scrollTo}></div>
@@ -181,17 +195,8 @@ console.log(fileUrl)
         <button className="btn btn-dark btn-lg" style={{width: "9rem"}} onClick={(e) => sendMessage(e)}>Send</button>
       </form>
       <div className="buttons">
-        {!user ? (
-          <button className="login" onClick={() => googleSignIn()}>
-            Login With Google
-          </button>
-        ) : (
-          <button className="login" onClick={() => logOut()}>
-            Log out
-          </button>
-        )}
        <Nav.Link to="/map" as={NavLink}>
-        <button className="btn btn-success"value="Submit Form" type="submit"> End Chat </button>
+        <button className="btn btn-success btn-lg"value="Submit Form" type="submit"> End Chat </button>
        </Nav.Link>
       </div>
     </div>

@@ -13,11 +13,17 @@ export function Auth () {
       const logOut = () => {
         signOut(auth)
       };
-    
+      
     return (
-        <div className = 'buttons'>
-        {!user ? <button className="login" onClick={() => googleSignIn()}>Login With Google</button> : 
-        <button className="login" onClick={() => logOut()}>Log out</button>}
+        <div className = ''>
+        {!user ? <button 
+        style={{ height: "3rem", position: "relative" }}
+        className="btn btn-success rounded-pill" 
+        onClick={() => googleSignIn()}>Login</button> : 
+        <button 
+        style={{ height: "3rem", position: "relative" }}
+        className=" btn btn-success rounded-pill" 
+        onClick={() => logOut()}>Log Out</button>}
       </div>
     );
 };
