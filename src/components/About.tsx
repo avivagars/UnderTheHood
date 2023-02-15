@@ -28,7 +28,7 @@ export function About() {
 
       </p>
       <h1 className="text-align-center fs-3"> My Story </h1>
-      <Row className="text-center align-middle container row" style={{marginLeft: 90, marginRight: 90}}>
+      <Row className="text-center align-middle container row" style={{marginLeft: 180, marginRight: 90}}>
         <Col>
           <img
             className="img-fluid mx-auto d-block"

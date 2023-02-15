@@ -190,17 +190,65 @@ export function CarForm() {
           </Dropdown.Toggle>
           <Dropdown.Menu className="form-select" onSelect={handleFormChange}>
             <Dropdown.Item
-              eventKey="Action"
-              name="pricing"
+              eventKey="Lights & Electrical"
+              name="Lights & Electrical"
               onClick={handleSelectDropdown}
             >
-              Pricing
+              Lights & Electrical
             </Dropdown.Item>
-            <Dropdown.Item eventKey="Another Action">
-              Another action
+            <Dropdown.Item 
+              eventKey="AC/Thermostat"
+              name="AC/Thermostat"
+              onClick={handleSelectDropdown}>
+              AC/Thermostat
             </Dropdown.Item>
-            <Dropdown.Item eventKey="Something Action">
-              Something else
+            <Dropdown.Item 
+              eventKey="Tires"
+              name="Tires"
+              onClick={handleSelectDropdown}>
+              Tires
+            </Dropdown.Item>
+            <Dropdown.Item 
+              eventKey="Brakes & Alignment"
+              name="Brakes & Alignment"
+              onClick={handleSelectDropdown}>
+              Brakes & Alignment
+            </Dropdown.Item>
+            <Dropdown.Item 
+              eventKey="Battery & Engine"
+              name="Battery & Engine"
+              onClick={handleSelectDropdown}>
+              Battery & Engine
+            </Dropdown.Item>
+            <Dropdown.Item 
+              eventKey="Exterior/ Body"
+              name="Exterior/ Body"
+              onClick={handleSelectDropdown}>
+              Exterior/ Body
+            </Dropdown.Item>
+            <Dropdown.Item 
+              eventKey="Interior"
+              name="Interior"
+              onClick={handleSelectDropdown}>
+              Interior
+            </Dropdown.Item>
+            <Dropdown.Item 
+              eventKey="General Tuning"
+              name="General Tuning"
+              onClick={handleSelectDropdown}>
+              General Tuning
+            </Dropdown.Item>
+            <Dropdown.Item 
+              eventKey="Oil & Filter"
+              name="Oil & Filter"
+              onClick={handleSelectDropdown}>
+              Oil & Filter
+            </Dropdown.Item>
+            <Dropdown.Item 
+              eventKey="Other"
+              name="Other"
+              onClick={handleSelectDropdown}>
+              Other
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

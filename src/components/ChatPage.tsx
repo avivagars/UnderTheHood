@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './ChatPage.css'
 import {
   addDoc,
@@ -14,17 +14,12 @@ import {
   useCollection,
 } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
+
 import { ChatForm } from "./ChatForm";
 import person from "../person_circle.png"
 import { Col, Nav, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
-import { url } from "inspector";
 import { Auth } from "./Auth";
 
 function ChatPage() {

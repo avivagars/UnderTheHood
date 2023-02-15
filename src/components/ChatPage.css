@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-
-/* .{
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
   
   .Chat{
     width: 100vw;
@@ -130,20 +122,6 @@
     border: 2px solid teal;
   }
   
-  /* .sendMessage button{
-    width: 25%;
-    border-radius: var(--radius);
-    cursor: pointer;
-    border: var(--border);
-    background-color: rgb(178, 173, 173);
-    transition: 0.25s;
-    font-size: calc(var(--font-size) * 2);
-  } */
-  
-  /* .sendMessage button:hover{
-    background-color: teal;
-    color: white;
-  } */
   
   .buttons{
     display: flex;
