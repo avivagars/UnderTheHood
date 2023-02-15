@@ -23,7 +23,7 @@ export function ChatForm() {
         {form.map((message, index) => {
   
         return (
-         <Card key={index} className="fs-4">
+         <Card key={index} className="fs-2">
           {' '}
           <div>Name: {message.name}</div>
           <div>Year: {message.year}</div>

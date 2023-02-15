@@ -106,15 +106,7 @@ console.log(fileUrl)
     setFormValue("");
   };
 
-  // const googleSignIn = () => {
-  //   const provider = new GoogleAuthProvider();
-  //   return signInWithPopup(auth, provider);
-  // };
-
-  // const logOut = () => {
-  //   signOut(auth);
-  // };
-
+  
   function ChatMessage(props: ChatMessageProps) {
     if (!auth.currentUser) return null;
     const { text, displayName, uid, photoURL } = props.message;
@@ -147,7 +139,7 @@ console.log(fileUrl)
       {/* {fileUrl} */}
       {fileUrl.map((img: string, index: any) => (
         <div className= "" key={index}>
-          <img className= "border border-dark" style={{margin: "10px"}} height="200px" src={img} alt=""/>
+          <img className= "border border-dark" style={{margin: "10px"}} height="400px" src={img} alt=""/>
         </div>
       ))}
       
